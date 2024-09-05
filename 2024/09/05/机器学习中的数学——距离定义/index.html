@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>机器学习中的数学——距离定义 | 芝士yjd的博客</title>
+    <meta name="author" content="yjd" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/b_d1432d341a304d9b08d4eb4f81209f9e.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>芝士YJD的博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;芝士YJD的博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>机器学习中的数学——距离定义</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/9/5
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/hy592070616/article/details/121723169?spm=1001.2014.3001.5501">机器学习中的数学——距离定义：基础知识_知识距离定义-CSDN博客</a></p>
+<h2 id="基础知识">基础知识</h2>
+<p>在机器学习中，我们经常需要计算样本之间的差异，进而评价个体的相似性和类别等信息。特征空间中两个样本之间的距离就是两个样本相似性的一种反映。常见的分类和聚类算法，如k近邻、k-means、层次聚类等、等都会选择一种距离或相似性的度量方法。根据数据特性的不同，可以采用不同的度量方法。</p>
+<p>一般而言，定义一个函数<strong>d(x,y)</strong>，它是一种距离度量，<strong>x、y</strong>表示需要计算距离的两点，则满足一些基本性质
+<span class="math display">\[
+d(x,y)\geq 0\\
+d(x,y)=0\iff x=y\\
+d(x,y)=d(y,x)\\
+d(x,y)\leq d(x,z)+d(z,y)
+\]</span></p>
+<h2 id="欧几里得距离euclidean-distance">欧几里得距离（Euclidean
+Distance）</h2>
+<p>欧几里得距离或欧几里得度量是欧几里得空间中两点间的即直线距离。使用这个距离，欧氏空间成为度量空间，相关联的范数称为欧几里得范数。</p>
+<p>用通俗的人话表述就是：在n维空间中，连接x、y两点的线段距离。</p>
+<p>n维空间中的欧几里得距离： <span class="math display">\[
+d(x,y)=\sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}=\sqrt{(x_1-y_1)^2+(x_2-y_2)^2+…+(x_n-y_n)^2}
+\]</span> Python实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">EuclideanDistance</span>(<span class="params">x, y</span>):</span><br><span class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">    x = np.array(x)</span><br><span class="line">    y = np.array(y)</span><br><span class="line">    <span class="keyword">return</span> np.sqrt(np.<span class="built_in">sum</span>(np.square(x-y)))</span><br></pre></td></tr></table></figure>
+<h2 id="曼哈顿距离manhattan-distance">曼哈顿距离（Manhattan
+Distance）</h2>
+<p>曼哈顿距离是种使用在几何度量空间的几何学用语，用以标明两个点在标准坐标系上的绝对轴距总和。</p>
+<p>下图中红线代表曼哈顿距离，绿色代表欧氏距离，也就是直线距离，而蓝色和黄色代表等价的曼哈顿距离</p>
+<figure>
+<img src="pic\曼哈顿距离区别.png"
+title="红线代表曼哈顿距离，绿色代表欧氏距离" alt="距离区别" />
+<figcaption aria-hidden="true">距离区别</figcaption>
+</figure>
+<p>n维空间中的曼哈顿距离： <span class="math display">\[
+d(x,y)=\sum_{i=1}^{n}\abs{x_i-y_i}=\abs{x_1-y_1}+\abs{x_2-y_2}+…+\abs{x_n-y_n}
+\]</span> python实现:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">ManhattanDistance</span>(<span class="params">x, y</span>):</span><br><span class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">    x = np.array(x)</span><br><span class="line">    y = np.array(y)</span><br><span class="line">    <span class="keyword">return</span> np.<span class="built_in">sum</span>(np.<span class="built_in">abs</span>(x-y))</span><br></pre></td></tr></table></figure>
+<h2 id="闵可夫斯基距离minkowski-distance">闵可夫斯基距离（Minkowski
+Distance）</h2>
+<p>闵可夫斯基距离不是一种距离，而是一组距离的定义，是对多个距离度量公式的概括性的表述，它包含了我们在中的欧几里得距离（p
+= 2）和曼哈顿距离（p = 1）就是闵可夫斯基距离的一种特殊情况</p>
+<p>n维空间中的闵可夫斯基距离 <span class="math display">\[
+d(x,y)=(\sum_{i=1}^n\abs{x_i-y_i}^p)^{\frac{1}{p}}
+\]</span> 由此公式我们不难看出</p>
+<ul>
+<li>当p=2时，其公式等价于欧几里得距离公式</li>
+<li>当p=1时，其公式等价于闵可夫斯基距离公式</li>
+</ul>
+<p>python实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">MinkowskiDistance</span>(<span class="params">x, y, p</span>):</span><br><span class="line">    <span class="keyword">import</span> math</span><br><span class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">    zipped_coordinate = <span class="built_in">zip</span>(x, y)</span><br><span class="line">    <span class="keyword">return</span> math.<span class="built_in">pow</span>(np.<span class="built_in">sum</span>([math.<span class="built_in">pow</span>(np.<span class="built_in">abs</span>(i[<span class="number">0</span>]-i[<span class="number">1</span>]), p) <span class="keyword">for</span> i <span class="keyword">in</span> zipped_coordinate]), <span class="number">1</span>/p)</span><br></pre></td></tr></table></figure>
+<h2 id="切比雪夫距离chebyshev-distance">切比雪夫距离（Chebyshev
+Distance）</h2>
+<p>切比雪夫距离（Chebyshev Distance）为L<span
+class="math inline">\(\infty\)</span>度量，是向量空间中的一种度量，二个点之间的距离定义是其各坐标数值差绝对值的最大值。</p>
+<p>以数学的观点来看，切比雪夫距离是由一致范数（或称为上确界范数）所衍生的度量，也是超凸度量的一种
+<span class="math display">\[
+d(x,y)=\max(\abs{x_i-y_i})
+\]</span>
+国际象棋棋盘上二个位置间的切比雪夫距离是指王要从一个位子移至另一个位子需要走的步数。由于王可以往斜前或斜后方向移动一格，因此可以较有效率的到达目的的格子。下图是棋盘上所有位置距王位置的切比雪夫距离。</p>
+<figure>
+<img src="\pic\切比雪夫距离图示.png" title="能看出到四周格子距离均为1"
+alt="切比雪夫距离图示" />
+<figcaption aria-hidden="true">切比雪夫距离图示</figcaption>
+</figure>
+<h2 id="马氏距离mahalanobis-distance">马氏距离（Mahalanobis
+Distance）</h2>
+<p>马氏距离是一种有效的计算两个未知样本集的相似度的方法，与欧氏距离不同的是它考虑到各种特性之间的联系并且是尺度无关的，即独立于测量尺度。</p>
+<p>如果直接采用欧式距离，衡量的是两点之间的直接距离（点与分布之间的欧式距离，指的是向量x与变量空间中心的距离），而没有考虑<strong>数据的分布特性</strong>。而采用马氏距离，在计算中对协方差进行归一化，则可以<strong>规避欧式距离对于数据特征方差不同的风险</strong>，从而使所谓的“距离”更加符合数据分布特征以及实际意义。<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46098574/article/details/115875336">1</a></p>
+<figure>
+<img src="pic\马氏距离图示.jpg" alt="马氏距离图示" />
+<figcaption aria-hidden="true">马氏距离图示</figcaption>
+</figure>
+<p>如上图所示，这是是两个变量的简单散点图。左图是两个变量之间不相关，Point
+1和Point
+2与分布中心的距离相等。右图是两个变量之间呈正相关。即随着一个变量（x轴）的值增加，另一变量（y轴）的值也增加。</p>
+<p>从几何上说，Point 1和Point
+2两个点与分布中心的距离相等（欧几里得距离）。即两点到分布的欧几里得距离相等，但实际上只有Point
+1更接近该分布。</p>
+<p>欧几里得距离仅是两点之间的距离，它不考虑数据集中的其余点的分布情况。因此，它不能用来真正判断一个点实际上与点的分布有多接近。</p>
+<p>所以我们需要的是更健壮的距离度量标准，该度量标准可以精确地表示<strong>一个点与其分布之间的距离</strong>。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 芝士yjd的博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;yjd
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>深度学习：从入门到入坟 | 芝士yjd的博客</title>
+    <meta name="author" content="yjd" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/b_d1432d341a304d9b08d4eb4f81209f9e.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>芝士YJD的博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;芝士YJD的博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>深度学习：从入门到入坟</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/9/5
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="机器学习rightarrow深度学习">机器学习<span
+class="math inline">\(\rightarrow\)</span>深度学习</h2>
+<p>机器学习（Machine
+Learning，ML）是研究计算机模拟人类的学习活动，获取知识和技能的理论和方法，改善系统性能的学科。</p>
+<p>计算机系统中“经验‘通常以数据的形式存在，机器要利用经验，就必须对数据进行分析。因此其过程可以简述如下：</p>
+<ul>
+<li>建立模型：设计计算机可以自动学习的算法</li>
+<li>训练：用数据训练算法模型（算法从数据中分析规律）</li>
+<li>预测：利用训练后的算法完成任务（根据学习的规律为未知数据进行分类和预测）</li>
+</ul>
+<p>由此我们可以得出机器学习的三个核心为：数据、模型、优化方法（算法）</p>
+<p><strong>按照学习任务分类</strong></p>
+<p>回归、分类、聚类是机器学习最常见的三大任务。</p>
+<ul>
+<li><p>回归是一种数学模型，利用数据统计原理，对大量统计数据进行数学处理，确定因变量与某些自变量的相关关系，建立一个相关性较好的回归方程（函数表达式）。</p></li>
+<li><p>分类就是对数据分进行分类，把它们分到已知的每一个类别。</p></li>
+<li><p>聚类就是对未知类别的样本进行划分，将它们按照一定的规则划分成若干个类族，把相似(距高相近)的样本聚在同一个类簇中。</p></li>
+<li><p>降维就是指采用某种映射方法，将原高维空间中的数据点映射到低维度的空间中，用一个相对低维的向量来表示原始高维度的特征。</p></li>
+<li><p>密度估计是是概率统计学的基本问题之一，就是由给定样本集合求解随机变量的分布密度函数问题。大多数人已经熟悉了其中一种常用的密度估计技术：直方图。</p></li>
+<li><p>排序学习是信息检索和搜索引擎研究的核心问题之一，通过机器学习方法学习一个分值函数对待排序的候选进行打分，再根据分值的高低确定序关系。</p></li>
+</ul>
+<p><strong>按学习方式分类</strong></p>
+<ul>
+<li><p>有监督学习指利用一组带标签的数据（已知输出的数据）训练学习模型，然后用经训练的模型对未知数据进行预测。</p></li>
+<li><p>无监督学习根据类别未知(没有被标记)的训练样本解决模式识别中的各种问题。</p></li>
+<li><p>强化学习（Reinforcement
+Learning，RL）又称为再励学习、评价学习，是一种通过模拟大脑神经细胞中的奖励信号来改善行为的机器学习方法。</p></li>
+</ul>
+<p>说了这么说，深度学习处于有监督下的回归和分类任务下的算法，本质上也属于机器学习的范畴，但其更注重多样化和大规模的数据、更多参数和大规模的模型</p>
+<ul>
+<li>深度学习是使用多层人工神经网络进行学习的模型</li>
+<li>深度强调多层，但是没有特指几层（隐藏层可以是5层、10层、几百、几千层）</li>
+<li>深度学习通过逐层特征变换，将样本原空间的特征变换到新特征空间，使分类或预测更容易</li>
+</ul>
+<figure>
+<img src="pic\深度学习图例.png" alt="深度学习图例" />
+<figcaption aria-hidden="true">深度学习图例</figcaption>
+</figure>
+<h2 id="模型近况">模型近况</h2>
+<ul>
+<li>2012-2015</li>
+</ul>
+<p>​
+AlexNet、VGG-Net、ZF-Net、GoogLeNet、FCN、Deeplab、DeconvNet、CRFRNN、SPP-Net、R-CNN、Fast
+R-CNN、Faster R-CNN、ResNet</p>
+<ul>
+<li>2016-2017</li>
+</ul>
+<p>​ ENet、MobileNet、ShuffleNet、PSPNet、RefineNet、DenseNet（CVPR 2017
+the best paper）</p>
+<ul>
+<li>2017（分割）</li>
+</ul>
+<p>​ Mask R-CNN（ICCV 2017 best paper）、<span
+class="math inline">\(Mask^X\)</span> R-CNN</p>
+<ul>
+<li>2017（胶囊神经网络）</li>
+</ul>
+<p>​ CapsuleNet</p>
+<ul>
+<li>2017-2018</li>
+</ul>
+<p>​
+NASNet系列（神经结构搜索）、Attention系列（注意力机制）、网络压缩、减枝系列</p>
+<h2 id="人工神经网络基础">人工神经网络基础</h2>
+<h3 id="人工神经元基本结构和功能">人工神经元基本结构和功能</h3>
+<ul>
+<li>对每一个输入信号进行处理并确定强度（加权）</li>
+<li>对所有输入信号进行组合（求和）</li>
+<li>对其组合信号处理并输出（激励）</li>
+</ul>
+<figure>
+<img src="pic\人工神经元图示.png" alt="人工神经元图示" />
+<figcaption aria-hidden="true">人工神经元图示</figcaption>
+</figure>
+<p>如图所示，假设输入信号为 <span class="math display">\[
+x_0、x_1、x_2…x_d
+\]</span> 其加权操作就是对每一个x乘以其权重w得到如下信号 <span
+class="math display">\[
+w_0x_0、w_1x_1、w_2x_2…w_dx_d
+\]</span> 求和则是对其进行累加求和，得到总输入信号量 <span
+class="math display">\[
+\sum_{i=0}^dw_ix_i
+\]</span>
+激励函数（激活函数），则是对总输入信号进行再次处理，这里假定为ReLU函数
+<span class="math display">\[
+f(x)=max(0,x)
+\]</span></p>
+<h3 id="激活函数激励函数">激活函数（激励函数）</h3>
+<p>将x可能的无限域变换到指定有限范围内，并且是非线性转移，常用的激励函数：</p>
+<figure>
+<img src="pic\常见激活函数图示.png" alt="常用激活函数图示" />
+<figcaption aria-hidden="true">常用激活函数图示</figcaption>
+</figure>
+<p>激活函数通常为<strong>非线性函数</strong>，可看下图图例演示推理</p>
+<figure>
+<img src="pic\非线性激活函数举例.png" alt="非线性激活函数图例" />
+<figcaption aria-hidden="true">非线性激活函数图例</figcaption>
+</figure>
+<p><span class="math inline">\(x_1、x_2、x_3\)</span>为输入，<span
+class="math inline">\(y_1、y_2、y_3、y_4\)</span>为隐藏层其权重参数简写为<span
+class="math inline">\(W^1\)</span>，<span
+class="math inline">\(z_1、z_2\)</span>为输出层其权重参数简写为<span
+class="math inline">\(W^2\)</span>，可以得到如下计算公式 <span
+class="math display">\[
+y_j=\sum_{i=1}^4w_{ij}x_i=W^1x\\
+z_k=\sum_{j=1}^2w_{jk}y_j=W^2y=W^2W^1x=W^‘x
+\]</span>
+由此可以看出，两层线性网络等效于单层网络，后者的加权矩阵为两个加权矩阵的乘积</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 芝士yjd的博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;yjd
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
