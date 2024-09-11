@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | 芝士yjd的博客</title>
+    <title>JavaWeb包部署流程 | 芝士yjd的博客</title>
     <meta name="author" content="yjd" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -42,6 +42,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -155,82 +159,107 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            
-<div id="archives">
-    
-    <div id="timeline-wrap" ref="timeline">
+            <div class="article">
+    <div>
+        <h1>JavaWeb包部署流程</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/9/11
+        </span>
         
-        <div class="timeline" data-title="helloworld">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/9/5</div>
-                <a href="/2024/09/05/hello-world/">
-                    <h3>Hello World</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="深度学习：从入门到入坟">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/9/5</div>
-                <a href="/2024/09/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9D%9F/">
-                    <h3>深度学习：从入门到入坟</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="图像处理基础内容">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/9/5</div>
-                <a href="/2024/09/05/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80%E5%86%85%E5%AE%B9/">
-                    <h3>图像处理基础内容</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="机器学习中的数学——距离定义">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/9/5</div>
-                <a href="/2024/09/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E2%80%94%E2%80%94%E8%B7%9D%E7%A6%BB%E5%AE%9A%E4%B9%89/">
-                    <h3>机器学习中的数学——距离定义</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="javaweb包部署流程">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/9/11</div>
-                <a href="/2024/09/11/JavaWeb%E5%8C%85%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B/">
-                    <h3>JavaWeb包部署流程</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
         
     </div>
+    
+    <div class="content" v-pre>
+        <h2 id="IDEA-安装"><a href="#IDEA-安装" class="headerlink" title="IDEA 安装"></a>IDEA 安装</h2><p>进入IDEA官网下载			<a target="_blank" rel="noopener" href="https://www.jetbrains.com/idea/">IntelliJ IDEA – the Leading Java and Kotlin IDE (jetbrains.com)</a></p>
+<p>学信网提供学籍档案		<a target="_blank" rel="noopener" href="https://www.chsi.com.cn/">中国高等教育学生信息网（学信网） (chsi.com.cn)</a></p>
+<h2 id="Tomcat-安装"><a href="#Tomcat-安装" class="headerlink" title="Tomcat 安装"></a>Tomcat 安装</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><ul>
+<li><p>进入Tomcat官网 			<a target="_blank" rel="noopener" href="https://tomcat.apache.org/">Apache Tomcat® - Welcome!</a></p>
+</li>
+<li><p>点击左侧**Which version?**查看对应版本信息</p>
+</li>
+</ul>
+<p><img src="/pic%5Ctomcat%E5%AE%98%E7%BD%91.png" alt="Tomcat官网"></p>
+<p><img src="/pic%5Ctomcat%E7%89%88%E6%9C%AC%E9%80%89%E6%8B%A9.png" alt="Tomcat版本选择"></p>
+<p><strong>Final Released Version</strong> 为目前放出版本</p>
+<p><strong>Supported java Version</strong> 为支持java版本，向更高版本兼容</p>
+<ul>
+<li>了解所选择版本后，<code>Tomcat8.5</code>维护时间较新推荐使用，此处笔者选择<code>Tomcat10</code>，点击左侧对应版本Tomcat，进入下载界面</li>
+</ul>
+<p><img src="/pic%5Ctomcat%E4%B8%8B%E8%BD%BD.png" alt="Tomcat下载"></p>
+<ul>
+<li>选择对应版本下载完成后，进行解压</li>
+</ul>
+<p><img src="/pic%5Ctomcat%E8%A7%A3%E5%8E%8B.png" alt="Tomcat解压"></p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>在此之前，请先确保正确配置了JAVA_HOME环境变量，如有出错会在下文集中处理</p>
+<ul>
+<li>打开 <code>环境变量</code> 配置界面，点击下方 <code>系统变量-新建</code> ，因系统差异，请自行查询如何打开</li>
+</ul>
+<p><img src="/pic%5Ctomcat%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE1.png" alt="系统变量配置"></p>
+<ul>
+<li>新建 <code>CATALINA_HOME</code> 系统变量，<ul>
+<li>变量名：<code>CATALINA_HOME</code></li>
+<li>变量值：<code>D:\DevelopTools\apache-tomcat-10.1.28</code>		<strong>此处为Tomcat根目录路径</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="C:\Users\hp\Desktop\吃屎\pic\tomcat环境变量配置2.png" alt="CATALINA_HOME变量配置"></p>
+<ul>
+<li>编辑 <code>PATH</code> 系统变量<ul>
+<li><p>选择 <code>PATH</code> 变量，点击编辑</p>
+<p><img src="/pic%5Ctomcat%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE3.png" alt="PATH变量编辑"></p>
+</li>
+<li><p>点击新建，依次添加 <code>%CATALINA_HOME%\lib</code> <code>%CATALINA_HOME%\bin</code> <code>%CATALINA_HOME%\lib\servlet-api.jar</code></p>
+<p><img src="/pic%5Ctomcat%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE4.png" alt="PATH变量配置"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul>
+<li>进入Tomcat解压目录，进入bin文件夹，右键<code> 在终端打开</code>，运行 <code>startup.bat</code>，如果配置正常则出现以下信息，并额外出现一个窗口</li>
+</ul>
+<p><img src="/pic%5Ctomcat%E4%BD%BF%E7%94%A81.png" alt="运行startup"></p>
+<p><img src="/pic%5Ctomcat%E8%BF%90%E8%A1%8C2.png" alt="Tomcat终端"></p>
+<ul>
+<li>进入浏览器输入网址 <code>localhost:8080</code> 进入网页查看</li>
+</ul>
+<p><img src="/pic%5Ctomcat%E8%BF%90%E8%A1%8C3.png" alt="Tomcat测试网页"></p>
+<ul>
+<li>运行 <code>shutdown.bat</code> 来关闭Tomcat	<strong>不推荐直接关闭ps窗口来关闭Tomcat</strong></li>
+</ul>
+<p><img src="/pic%5Ctomcat%E8%BF%90%E8%A1%8C4.png" alt="Tomcat关闭"></p>
+<h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><h4 id="出现窗口但立刻消失"><a href="#出现窗口但立刻消失" class="headerlink" title="出现窗口但立刻消失"></a>出现窗口但立刻消失</h4><ul>
+<li><p>确保 <code>JAVA_HOME</code> 系统变量已配置或配置正确</p>
+</li>
+<li><p><code>CATALINA_HOME</code>中的路径不能以 <code>\</code> 结尾。</p>
+</li>
+<li><p>使用 <code>PowerShell</code> 等终端打开 <code>bat文件</code> 而不是直接双击运行</p>
+</li>
+</ul>
+<h4 id="运行-start-bat-报错"><a href="#运行-start-bat-报错" class="headerlink" title="运行 start.bat 报错"></a>运行 <code>start.bat</code> 报错</h4><p><img src="/pic%5Ctomcat%E6%8A%A5%E9%94%99.png" alt="tomcat报错"></p>
+<ul>
+<li>确保 <code>JAVA_HOME</code> 系统变量已配置或配置正确</li>
+</ul>
+<h4 id="Tomcat终端乱码"><a href="#Tomcat终端乱码" class="headerlink" title="Tomcat终端乱码"></a>Tomcat终端乱码</h4><p><img src="/pic%5Ctomcat%E6%8A%A5%E9%94%992.png" alt="Tomcat乱码"></p>
+<ul>
+<li><p>在 <code>.\apache-tomcat-XXXX\conf</code> 下打开 <code>logging.properties</code>文件</p>
+</li>
+<li><p>将<code>java.util.logging.ConsoleHandler.encoding = UTF-8</code><br>替换为<code>java.util.logging.ConsoleHandler.encoding = GBK</code></p>
+</li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
             <footer id="footer">
@@ -261,6 +290,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
